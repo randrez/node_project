@@ -21,7 +21,7 @@ export class AuthRepositoryImpl implements AuthRepository {
                 const user = await repositoryUser.find({where:{ auth: auth[0] }})
                 if (user != null) {
                     const tokenData = { username: username, password: this.hashPassword(password) }
-                    const token = jwt.sign(tokenData, 'Secret password', {
+                    const token = jwt.sign(tokenData, 'secret_password', {
                         expiresIn: 60 * 60 * 24
                     })
                     response.state = true
@@ -54,6 +54,7 @@ export class AuthRepositoryImpl implements AuthRepository {
                 user.lastName = lastName
                 user.email = email
                 user.auth = auth
+                user.createdAt = new Date()
                 const userEntity = repositoryUser.save(user)
                 return userEntity
             } else {

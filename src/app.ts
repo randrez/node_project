@@ -3,6 +3,7 @@ import express from 'express'
 var cors = require('cors')
 import { NOT_FOUND_STATUS_CODE, NOT_FOUND_STATUS_MESSAGE } from './config/constants'
 import {routes as apiRoutes} from './routes/index'
+import {MiddlewaresError} from './middlewares/error.handler'
 
 const app = express()
 
@@ -18,5 +19,5 @@ app.use((req, res, next) => {
   res.statusCode = NOT_FOUND_STATUS_CODE
   res.send(err.message)
 });
-
+app.use(MiddlewaresError.handleRequestError)
 export { app }
