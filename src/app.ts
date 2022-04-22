@@ -1,10 +1,12 @@
 import bodyParser from 'body-parser'
 import express from 'express'
+var cors = require('cors')
 import { NOT_FOUND_STATUS_CODE, NOT_FOUND_STATUS_MESSAGE } from './config/constants'
 import {routes as apiRoutes} from './routes/index'
 
 const app = express()
 
+app.use(cors())
 app.use(bodyParser.json({ limit: '50mb', type: 'application/json' }))
 app.use(express.urlencoded({ extended: true }));
 

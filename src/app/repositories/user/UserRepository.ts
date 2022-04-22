@@ -1,4 +1,3 @@
-
 import { User } from '../../models/entities/User';
 
 export interface UserRepository {
