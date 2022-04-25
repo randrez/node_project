@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken')
 import { DecryptCrypto } from '../config/decryptCrypto'
-const decryptService:DecryptCrypto = new DecryptCrypto()
+import { KEY } from '../config/constants'
+
+const decryptService: DecryptCrypto = new DecryptCrypto()
 
 export class MiddletareToken {
 
@@ -10,7 +12,7 @@ export class MiddletareToken {
         if (authHeader) {
             const token = authHeader.split(' ')[1];
             console.log(token)
-            const tokentDecrypt = decryptService.decrypt('836726', token)
+            const tokentDecrypt = decryptService.decrypt(KEY, token)
             jwt.verify(tokentDecrypt, 'secret_password', (err: any, user: any) => {
                 if (err) {
                     return res.sendStatus(403);

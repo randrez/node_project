@@ -12,6 +12,7 @@ const UNPROCESSABLE_ENTITY_STATUS_CODE = 422;
 const TYPE_DATABASE = "oracle"
 const SUCCESS_LOGIN = 'Login successfully'
 const ERROR_LOGIN = 'Login failed'
+const KEY = '836726'
 
 export {
     BAD_REQUEST_STATUS_CODE,
@@ -27,5 +28,6 @@ export {
     SUCCESS_RESPONSE_NO_CONTENT_STATUS_CODE,
     TYPE_DATABASE,
     SUCCESS_LOGIN,
-    ERROR_LOGIN
-};
+    ERROR_LOGIN,
+    KEY
+}

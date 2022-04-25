@@ -2,13 +2,18 @@ import { Request, Response } from 'express'
 import { IAuth } from '../models/Auth'
 import { IUser } from '../models/User'
 import { AuthRepositoryImpl } from '../repositories/auth/AuthRepositoryImpl'
+import { KEY } from '../../config/constants'
+import { DecryptCrypto } from '../../config/decryptCrypto'
+
 const repository: AuthRepositoryImpl = new AuthRepositoryImpl()
+const decryptService: DecryptCrypto = new DecryptCrypto()
 
 export class AuthController {
 
     public static login(_req: Request, _res: Response) {
         const { username, password } = _req.body
-        repository.login(username, password.toString()).then((login) => {
+        const passwordDencrypt = decryptService.decrypt(KEY, password.toString())
+        repository.login(username, passwordDencrypt).then((login) => {
             return _res.send(login)
         }).catch((error) => {
             return _res.send(error)
